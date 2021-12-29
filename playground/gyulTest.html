@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <send></send>
+        <receive>        </receive>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('send',{
+            template:`
+                <div class>
+                    <button @click="send">귤 보내기</button>
+                    <div class="basket"></div>
+                </div>
+            `,
+            data(){
+                return{
+                    basket:'',
+                    changedProps:''
+                }
+            },
+            props:['prop'],
+            methods: {
+                change:function(){
+                    this.changedProps=this.prop
+                },
+                send:function(){
+                    var senderBasket=document.querySelector('.basket')
+                    this.basket+='귤'
+                    senderBasket.innerHTML=this.basket
+                }
+            }
+        })
+
+        Vue.component('receive',{
+            template:`
+                <div class>
+                    <button @click="receive">귤 받기</button>
+                </div>
+            `,
+            data(){
+                return{
+                   
+                }
+            },
+            methods: {
+                receive:function(){
+                    var senderBasket=document.querySelector('.basket')
+                    senderBasket.innerHTML=''
+                   location.reload()
+                }
+            },
+            components:{
+                'child-child':{
+                    template:`
+                        <div>
+                            child-child
+                        </div>
+                    `
+                }
+            }
+        })
+
+        new Vue({
+            el:'#app',
+            data:{
+                test:''
+            },
+            components:{
+                'app-footer':{
+                    template: ``
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>
